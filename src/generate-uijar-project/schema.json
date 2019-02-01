@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "AddUIJarProject",
+  "title": "Ui Jar Project Options Schema",
+  "type": "object",
+  "description": "Adds an ui-jar project to generate UI libraries.",
+  "properties": {
+    "skipInstall": {
+      "description": "When true, does not install dependency packages.",
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

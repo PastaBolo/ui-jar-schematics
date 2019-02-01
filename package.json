@@ -1,0 +1,32 @@
+{
+  "name": "ui-jar-schematics",
+  "version": "0.0.1",
+  "description": "Schematics that add an ui-jar project in an Angular workspace for making documentation",
+  "homepage": "https://github.com/PastaBolo/ui-jar-schematics",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && jasmine src/**/*_spec.js"
+  },
+  "keywords": [
+    "schematics",
+    "angular",
+    "ui-jar",
+    "documentation"
+  ],
+  "author": "PastaBolo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PastaBolo/ui-jar-schematics"
+  },
+  "schematics": "./src/collection.json",
+  "dependencies": {
+    "@angular-devkit/core": "^7.3.0",
+    "@angular-devkit/schematics": "^7.3.0",
+    "@schematics/angular": "7.3.0",
+    "@types/jasmine": "^2.6.0",
+    "@types/node": "^8.0.31",
+    "jasmine": "^2.8.0",
+    "typescript": "~3.1.6"
+  }
+}
