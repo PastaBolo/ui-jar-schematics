@@ -1,3 +1,6 @@
 # Ignores TypeScript files, but keeps definitions.
 *.ts
 !*.d.ts
+
+# Keep files in files folder that are added or replacing the previous ones by running the schematics (can include ts files)
+!src/*/files/**/*
