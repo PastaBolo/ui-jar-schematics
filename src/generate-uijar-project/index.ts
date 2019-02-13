@@ -8,7 +8,8 @@ import {
   url,
   move,
   chain,
-  noop
+  noop,
+  MergeStrategy
 } from '@angular-devkit/schematics'
 import {
   addPackageJsonDependency,
@@ -25,12 +26,12 @@ export default function(options: GenerateUiJarProjectOptions): Rule {
     (_tree: Tree, context: SchematicContext) => {
       !options.skipInstall ? context.addTask(new NodePackageInstallTask()) : noop()
     },
+    addUIJarDependency(),
     externalSchematic<ApplicationOptions>('@schematics/angular', 'application', {
       name: 'ui-jar',
       skipInstall: true,
       minimal: true
     }),
-    addUIJarDependency(),
     setupUIJarProject()
   ])
 }
@@ -55,7 +56,7 @@ function addScriptsToPackageJson(): Rule {
     const json = JSON.parse(tree.read('./package.json')!.toString('utf-8'))
 
     json.scripts['start:ui-jar'] =
-      'node node_modules/ui-jar/dist/bin/cli.js --directory ./src/app/ --includes \\.ts$ && ng serve ui-jar'
+      'node node_modules/ui-jar/dist/bin/cli.js --directory ./src/app/ --includes \\.ts$ && ng serve ui-jar -o'
 
     tree.overwrite('./package.json', JSON.stringify(json, null, 2))
   }
@@ -78,19 +79,5 @@ function updateTsConfig(): Rule {
 }
 
 function replaceFiles(): Rule {
-  return (tree: Tree, _context: SchematicContext) => {
-    const files = [
-      './projects/ui-jar/src/index.html',
-      './projects/ui-jar/src/main.ts',
-      './projects/ui-jar/src/styles.css'
-    ]
-
-    files.forEach(file => deleteFile(tree, file))
-
-    return mergeWith(apply(url('./files'), [move('./projects/ui-jar/src')]))
-  }
-}
-
-function deleteFile(tree: Tree, path: string): void {
-  if (tree.exists(path)) tree.delete(path)
+  return mergeWith(apply(url('./files'), [move('./projects/ui-jar/src')]), MergeStrategy.Overwrite)
 }

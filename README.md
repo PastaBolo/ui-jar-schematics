@@ -1,5 +1,11 @@
 # Ui-jar Schematics
 
+## Installation
+
+```
+npm i -D ui-jar-schematics
+```
+
 ## 1 - Set up an initial ui-jar project
 
 ```
@@ -37,7 +43,7 @@ ng g ui-jar-schematics:add-uijar-doc [options]
 ```
 options :
 
---project=name (a prompt asks it if not specified)
+--project=name (a prompt asks it if not specified (prompt is supported only in Angular 7+))
 ```
 
 ### Run the style guide for the specific project or library

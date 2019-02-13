@@ -1,6 +1,6 @@
 {
   "name": "ui-jar-schematics",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Schematics that add an ui-jar project in an Angular workspace for making documentation",
   "homepage": "https://github.com/PastaBolo/ui-jar-schematics",
   "scripts": {
