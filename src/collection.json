@@ -1,6 +1,10 @@
 {
   "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
+    "ng-add": {
+      "description": "Download the collection of schematics and launch automatically generate-uijar-project.",
+      "factory": "./ng-add"
+    },
     "generate-uijar-project": {
       "description": "A schematic that add an ui-jar project.",
       "factory": "./generate-uijar-project",
