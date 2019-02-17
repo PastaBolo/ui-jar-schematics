@@ -19,6 +19,8 @@ import {
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks'
 import { Schema as ApplicationOptions } from '@schematics/angular/application/schema'
 
+import { getDependencyVersion } from '../utility/dependencies'
+
 import { Schema as GenerateUiJarProjectOptions } from './schema'
 
 export default function(options: GenerateUiJarProjectOptions): Rule {
@@ -37,14 +39,18 @@ export default function(options: GenerateUiJarProjectOptions): Rule {
 }
 
 function addUIJarDependency(): Rule {
-  return (tree: Tree, _context: SchematicContext) => {
-    const uijarDependency: NodeDependency = {
-      name: 'ui-jar',
-      version: '*',
-      type: NodeDependencyType.Dev
-    }
-    addPackageJsonDependency(tree, uijarDependency)
+  const uijarDependency: NodeDependency = {
+    name: 'ui-jar',
+    version: '*',
+    type: NodeDependencyType.Dev
   }
+
+  return chain([
+    getDependencyVersion(uijarDependency),
+    (tree: Tree, _context: SchematicContext) => {
+      addPackageJsonDependency(tree, uijarDependency)
+    }
+  ])
 }
 
 function setupUIJarProject(): Rule {

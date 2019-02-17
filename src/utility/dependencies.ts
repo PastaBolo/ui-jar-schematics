@@ -38,13 +38,17 @@ function fetchDependencyVersion(dependency: NodeDependency) {
   })
 }
 
+export function getDependencyVersion(dependency: NodeDependency): Rule {
+  return (tree: Tree, _context: SchematicContext): Observable<Tree> =>
+    fetchDependencyVersion(dependency).pipe(switchMap(() => of(tree)))
+}
+
 export function getDependenciesVersion(dependencies: NodeDependency[]): Rule {
-  return (tree: Tree, _context: SchematicContext): Observable<Tree> => {
-    return of(dependencies).pipe(
+  return (tree: Tree, _context: SchematicContext): Observable<Tree> =>
+    of(dependencies).pipe(
       mergeMap(dependencies => forkJoin(...dependencies.map(fetchDependencyVersion))),
       switchMap(() => of(tree))
     )
-  }
 }
 
 export function addPackageJsonDependencies(dependencies: NodeDependency[]): Rule {
