@@ -1,16 +1,42 @@
 # Ui-jar Schematics
 
-## Installation
+## 1 - Installation
+
+```
+ng add ui-jar-schematics
+```
+
+This will download the collection of schematics and set up an initial ui-jar project automatically :
+
+- creates a project named 'ui-jar' in the projects directory of the Angular workspace
+- downloads the ui-jar dependency (with the latest version)
+- sets up the project : adds script to package.json file, updates tsconfig.app.json, replaces main.ts and index.html files
+
+This initial project works for the default project created within the Angular workspace by the `ng new` command (if not skipped with the ng new option : `--createApplication=false`)
+
+### Alternative
+
+If you installed the schematics using
 
 ```
 npm i -D ui-jar-schematics
 ```
 
-## 1 - Set up an initial ui-jar project
+You have to set up the initial ui-jar project by running this command :
 
 ```
 ng g ui-jar-schematics:generate-uijar-project [options]
 ```
+
+```
+options :
+
+--skipInstall=true|false (default: false)
+```
+
+> skip the installation of the needed packages (ui-jar)
+
+## 2 - Set up an initial ui-jar project
 
 - creates a project named 'ui-jar' in the projects directory of the Angular workspace
 - downloads the ui-jar dependency
